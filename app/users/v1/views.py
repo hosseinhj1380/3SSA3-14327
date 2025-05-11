@@ -19,7 +19,7 @@ def get_tokens_for_user(user):
 class RegisterView(APIView):
     permission_classes = [permissions.AllowAny]
 
-    @extend_schema(request=RegisterSerializer, responses=UserSerializer)    
+    @extend_schema(request=RegisterSerializer, responses=UserSerializer,tags=["account"])    
     def post(self, request):
         serializer = RegisterSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -31,7 +31,7 @@ class RegisterView(APIView):
 class LoginView(APIView):
     permission_classes = [permissions.AllowAny]
     
-    @extend_schema(request=LoginSerializer, responses=UserSerializer)
+    @extend_schema(request=LoginSerializer, responses=UserSerializer,tags=["account"])
     def post(self, request):
         serializer = LoginSerializer(data=request.data)
         if serializer.is_valid(raise_exception=True):
@@ -44,6 +44,6 @@ class LoginView(APIView):
 class ProfileView(APIView):
     permission_classes = [permissions.IsAuthenticated]
     
-    @extend_schema(responses=UserSerializer)
+    @extend_schema(responses=UserSerializer,tags=["account"])
     def get(self, request):
         return Response(UserSerializer(request.user).data)
