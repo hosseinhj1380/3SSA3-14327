@@ -6,6 +6,7 @@ from .serializer import LoginSerializer, RegisterSerializer, UserSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 from django.contrib.auth import get_user_model
 from drf_spectacular.utils import extend_schema
+from rest_framework_simplejwt.views import TokenRefreshView
 
 User = get_user_model()
 
@@ -28,6 +29,7 @@ class RegisterView(APIView):
             return Response({"user": UserSerializer(user).data, "tokens": tokens}, status=status.HTTP_201_CREATED)
         
 
+
 class LoginView(APIView):
     permission_classes = [permissions.AllowAny]
     
@@ -47,3 +49,8 @@ class ProfileView(APIView):
     @extend_schema(responses=UserSerializer,tags=["account"])
     def get(self, request):
         return Response(UserSerializer(request.user).data)
+
+class TokenRefreshView(TokenRefreshView):
+    @extend_schema(tags=['account'])
+    def post(self, request):
+        return super().post(request)
