@@ -52,7 +52,10 @@ THIRD_PARTY_APPS=["rest_framework",
     "drf_spectacular",
     "corsheaders",
     ]
-LOCAL_APPS=["app.users"]
+LOCAL_APPS=[
+    "app.users",
+    "app.booking"
+    ]
 
 
 INSTALLED_APPS = DJANGO_APPS + THIRD_PARTY_APPS + LOCAL_APPS
@@ -95,8 +98,9 @@ REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
-    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema'
-
+    'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
+    "DATETIME_FORMAT": "%Y-%m-%d %H:%M",
+    "DATETIME_INPUT_FORMATS": ["%Y-%m-%d %H:%M"],
 }
 
 ROOT_URLCONF = "config.urls"
@@ -229,4 +233,15 @@ LOGGING = {
             "propagate": True,
         },
     },
+}
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=60),   # default is 5 minutes
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=30),     # default is 1 day
+    'ROTATE_REFRESH_TOKENS': False,
+    'BLACKLIST_AFTER_ROTATION': True,
+
+    # Optional settings for enhanced control
+    'AUTH_HEADER_TYPES': ('Bearer',),
+    'AUTH_TOKEN_CLASSES': ('rest_framework_simplejwt.tokens.AccessToken',),
 }

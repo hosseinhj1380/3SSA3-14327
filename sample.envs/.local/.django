@@ -9,4 +9,12 @@ INTERNAL_IPS: '127.0.0.1'
 CSRF_TRUSTED_ORIGINS: 'http://localhost:8000'
 
 
+# App environment need 
+# --------------------------------------------------------------------------------
+DEFAULT_AMOUNT: 100000
+MIN_RESERVATION_HOURS:1 #hours
+MAX_RESERVATION_HOURS:3 #hours
+RESTAURANT_OPENING_HOUR: 8 # 8 AM
+RESTAURANT_CLOSING_HOUR: 23 # 11 PM
+
 
