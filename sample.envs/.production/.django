@@ -1,0 +1,15 @@
+# General
+# ------------------------------------------------------------------------------
+# DJANGO_READ_DOT_ENV_FILE=True
+SECRET_KEY: 'django-insecure-gvk#9(tx%0ts*uhfu8w(_k%n%#kp%yndfrdd+xv^16g6!hc5b3'
+DEBUG: 'True'
+ALLOWED_HOSTS: '*'
+INTERNAL_IPS: '127.0.0.1'
+CSRF_TRUSTED_ORIGINS: 'http://localhost:8000'
+
+# ------------------------------------------------------------------------------
+PORT: "8000"
+GUNICORN_MAX_REQUESTS: "1000"
+GUNICORN_WORKER_CLASS: "sync"
+GUNICORN_MAX_WORKERS: "10"
+
