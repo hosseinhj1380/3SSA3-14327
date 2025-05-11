@@ -4,7 +4,7 @@ from django.utils import timezone
 from datetime import timedelta
 from app.booking import values
 
-class BookingRequestSerializer(serializers.Serializer):
+class ReservationRequestSerializer(serializers.Serializer):
     individuals_number= serializers.IntegerField(min_value=1)
     start_time = serializers.DateTimeField()
     end_time = serializers.DateTimeField()
@@ -13,7 +13,6 @@ class BookingRequestSerializer(serializers.Serializer):
         start = data['start_time']
         end = data['end_time']
         now = timezone.now()
-
         if start <= now:
             raise serializers.ValidationError("Start time must be in the future.")
         if end <= now:
@@ -30,11 +29,9 @@ class BookingRequestSerializer(serializers.Serializer):
             raise serializers.ValidationError(
                 f"Reservation cannot exceed {values.MAX_RESERVATION_HOURS} hour(s)."
             )
-
-        # Time boundary check (opening/closing hours)
         opening_hour = values.RESTAURANT_OPENING_HOUR
         closing_hour = values.RESTAURANT_CLOSING_HOUR
-
+    
         if not (opening_hour <= start.hour < closing_hour):
             raise serializers.ValidationError(
                 f"Reservation must start between {opening_hour}:00 and {closing_hour - 1}:59."
@@ -48,7 +45,7 @@ class BookingRequestSerializer(serializers.Serializer):
 
 
 
-class BookingResponseSeralizer(serializers.ModelSerializer):
+class ReservationResponseSeralizer(serializers.ModelSerializer):
     class Meta:
         model = Reservation
         fields ='__all__'

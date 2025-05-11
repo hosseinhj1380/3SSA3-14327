@@ -16,7 +16,7 @@ class Table(models.Model):
 
 
 class Reservation(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,db_index=True)
     table = models.ForeignKey(Table, related_name="reservations", on_delete=models.CASCADE)
     reserved_seats = models.IntegerField()
     cost = models.DecimalField(max_digits=10, decimal_places=2)
