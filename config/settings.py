@@ -100,8 +100,8 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     ),
     'DEFAULT_SCHEMA_CLASS': 'drf_spectacular.openapi.AutoSchema',
-    "DATETIME_FORMAT": "%Y-%m-%d %H:%M",
-    "DATETIME_INPUT_FORMATS": ["%Y-%m-%d %H:%M"],
+    # "DATETIME_FORMAT": "%Y-%m-%d %H:%M",
+    # "DATETIME_INPUT_FORMATS": ["%Y-%m-%d %H:%M"],
 }
 
 ROOT_URLCONF = "config.urls"
